@@ -5,9 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Library</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="javascript.js"></script>
+    <script src="javascript.js" defer></script>
 </head>
 <body>
-    Library
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to your Library!</h1>
+        </div>
+        <div class="sidebar">
+            <button class="form-button">New Book</button>
+        </div>
+        <div class="content"></div>
+        <div class="form-container">
+            <div class="form-inner">
+                <h2>Please Enter Book Information</h2>
+                <div class="close"><button class="close-form">X</button></div>
+                <form action="example.com/path" id="form">
+                    <div class="author">
+                        <label for="author">Author:</label>
+                        <input type="text" id="author" name="author">
+                    </div>
+
+                    <div class="title">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="title">
+                    </div>
+
+                    <div class="pages">
+                        <label for="pages"># of Pages:</label>
+                        <input type="text" id="pages" name="pages">
+                    </div>
+
+                    <div class="read">
+                        <label for="read">Have you read this book?</label>
+                        <input type="text" id="read" name="read">
+                    </div>
+                    <button type="submit" class="submit">Create New Book</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
