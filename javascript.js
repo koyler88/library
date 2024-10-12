@@ -1,35 +1,50 @@
 const myLibrary = [];
+const container = document.querySelector(".container")
 const content = document.querySelector(".content");
 
-let book1 = new Book('J.R.R Tolkien', 'The Hobbit', 298, 'No');
-let book2 = new Book('Jim Joe', 'The great book', 400, 'Yes');
-let book3 = new Book('Maggy Pie', 'All about birds', 120, 'No');
+let book1 = new Book('J.R.R Tolkien', 'The Hobbit', 298, 'Read');
+let book2 = new Book('Jim Joe', 'The great book', 400, 'Not Read');
+let book3 = new Book('Maggy Pie', 'All about birds', 120, 'Not Read');
 
 myLibrary.push(book1)
 myLibrary.push(book2)
 myLibrary.push(book3)
 
 function Book(author, title, pages, read) {
-    this.author = author
-    this.title = title
-    this.pages = pages
-    this.read = read
+    this.author = `Author: ${author}`
+    this.title = `Title: ${title}`
+    this.pages = `Pages: ${pages}`
+    this.read = `Status: ${read}`
 };
 
 function addBookToLibrary(book) {
     myLibrary.push(book)
 };
-
-
+let itemCount = 1
 function displayLibrary() {
+    let bookCount = 0
     for (book of myLibrary) {
         bookCard = document.createElement('div')
         bookCard.classList.add('card')
         for (item in book) {
             newDiv = document.createElement('div')
             newDiv.textContent = book[item]
+            if (itemCount === 4) {
+                newDiv.classList.add("status")
+            }
             bookCard.appendChild(newDiv)
+            itemCount += 1;
         }
+        removeButton = document.createElement('button')
+        removeButton.classList.add("remove")
+        removeButton.textContent = "Remove Book"
+        bookCard.appendChild(removeButton)
+        toggleButton = document.createElement('button')
+        toggleButton.classList.add('toggle')
+        toggleButton.textContent = "Toggle Read Status"
+        bookCard.appendChild(toggleButton)
+        bookCard.dataset.booknumber = bookCount
+        bookCount += 1;
         content.appendChild(bookCard)
     }
 };
@@ -63,7 +78,53 @@ submit.addEventListener("click", (event) => {
         content.removeChild(content.lastChild)
     }
     displayLibrary();
+    formContainer.classList.remove("open")
+    removeButtonLogic();
+    toggleButtonLogic();
+    form.reset()
 })
 
 displayLibrary();
+
+removeButtonLogic();
+toggleButtonLogic();
+
+function removeButtonLogic() {
+    let removeButtons = document.querySelectorAll(".remove")
+    removeButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            console.log(btn.parentElement.dataset.booknumber)
+            myLibrary.splice((btn.parentElement.dataset.booknumber),1)
+            while (content.firstChild) {
+                content.removeChild(content.lastChild)
+            }
+            displayLibrary();
+            removeButtons = document.querySelectorAll(".remove")
+            removeButtonLogic();
+            toggleButtonLogic();
+        })
+    })
+}
+
+
+function toggleButtonLogic() {
+    let toggleButtons = document.querySelectorAll(".toggle")
+    toggleButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const booknumber = btn.parentElement.dataset.booknumber;
+            const div = document.querySelector(`div[data-booknumber="${booknumber}"]`)
+            const divChildren = div.children;
+            const status = divChildren[3]
+            if (status.textContent === "Status: Not Read") {
+                status.textContent = "Status: Read"
+            }
+            else {
+                status.textContent = "Status: Not Read"
+            }
+        })
+    })
+}
+
+
+
 

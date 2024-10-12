@@ -3,42 +3,74 @@
     margin: 0;
 }
 
+body {
+    background-color: #938366;
+}
+
+h1 {
+    color: #513c08;
+}
+
 .container {
     display: grid;
-    grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr 10fr;
     height: 100vh;
 }
 
 .header {
     display: flex;
-    grid-column: 2;
+    grid-row: 1;
     justify-content: center;
     align-items: center;
+    background-color: #636e51;
+    box-shadow: 0px 5px 5px #dedec3;
+    gap: 20px;
 }
 
-.sidebar {
-    grid-column: 1;
-    grid-row: 1 / 2;
-    display: flex;
-    justify-content: center;
+.form-button {
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    border: none;
+    background-color: beige;
+}
+
+.form-button:hover {
+    font-weight: bold;
 }
 
 .content {
-    grid-column: 2;
+    grid-row: 2;
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
 }
 
 .card {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    border: 5px solid gray;
+    border: 5px solid #636e51;
     text-align: center;
-    height: 30%;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 20px;
+    background-color:#dedec3;
+}
+
+.remove {
     width: 100px;
+    height: 30px;
+    align-self: center;
+    border-radius: 5px;
+    border: none;
+}
+
+.remove:hover {
+    font-weight: bold;
 }
 
 .form-button {
@@ -51,7 +83,7 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 200px;
 
     display: flex;
     align-items: center;
@@ -60,13 +92,38 @@
     z-index: -999;
 }
 
+#form {
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.formtop {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.read {
+    margin-bottom: 20px;
+}
 .form-inner {
-    display: grid;
-    grid-template-columns: 20fr 1fr;
-    width: 25%;
-    border: 5px solid gray;
+    border: 5px solid #636e51;
+    border-radius: 10px;
+    background-color: #dedec3;
+    padding: 10px;
+    align-items: center;
+    justify-items: center;
 }
 
 .form-container.open {
     opacity: 1;
+    z-index: 30;
+    backdrop-filter: blur(10px);
 }
