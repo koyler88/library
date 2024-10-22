@@ -2,6 +2,16 @@ const myLibrary = [];
 const container = document.querySelector(".container")
 const content = document.querySelector(".content");
 
+class Book{
+    constructor(author, title, pages, read) {
+        this.author = `Author: ${author}`
+        this.title = `Title: ${title}`
+        this.pages = `Pages: ${pages}`
+        this.read = `Status: ${read}`
+    }
+    
+};
+
 let book1 = new Book('J.R.R Tolkien', 'The Hobbit', 298, 'Read');
 let book2 = new Book('Jim Joe', 'The great book', 400, 'Not Read');
 let book3 = new Book('Maggy Pie', 'All about birds', 120, 'Not Read');
@@ -9,13 +19,6 @@ let book3 = new Book('Maggy Pie', 'All about birds', 120, 'Not Read');
 myLibrary.push(book1)
 myLibrary.push(book2)
 myLibrary.push(book3)
-
-function Book(author, title, pages, read) {
-    this.author = `Author: ${author}`
-    this.title = `Title: ${title}`
-    this.pages = `Pages: ${pages}`
-    this.read = `Status: ${read}`
-};
 
 function addBookToLibrary(book) {
     myLibrary.push(book)
