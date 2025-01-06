@@ -70,21 +70,62 @@ closeForm.addEventListener("click", () => {
 submit.addEventListener("click", (event) => {
     event.preventDefault();
 
-    const formInfo = new FormData(form);
-    const newBook = new Book(
-        formInfo.get('author'),
-        formInfo.get('title'),
-        formInfo.get('pages'),
-        formInfo.get('read'));
-    myLibrary.push(newBook);
-    while (content.firstChild) {
-        content.removeChild(content.lastChild)
-    }
-    displayLibrary();
-    formContainer.classList.remove("open")
-    removeButtonLogic();
-    toggleButtonLogic();
-    form.reset()
+    const author = document.getElementById("author");
+    const title = document.getElementById("title");
+    const pages = document.getElementById("pages");
+    const status = document.getElementById("read");
+    const errorMessage = document.getElementById("errorMessage")
+    author.setCustomValidity("")
+    title.setCustomValidity("")
+    pages.setCustomValidity("")
+    status.setCustomValidity("")
+        if (author.validity.valid) {
+            if (title.validity.valid) {
+                if (pages.validity.valid) {
+                    if (status.validity.valid) {
+                        const formInfo = new FormData(form);
+                        const newBook = new Book(
+                            formInfo.get('author'),
+                            formInfo.get('title'),
+                            formInfo.get('pages'),
+                            formInfo.get('read'));
+                        myLibrary.push(newBook);
+                        while (content.firstChild) {
+                            content.removeChild(content.lastChild)
+                        }   
+                        displayLibrary();
+                        formContainer.classList.remove("open")
+                        removeButtonLogic();
+                        toggleButtonLogic();
+                        form.reset()
+                        errorMessage.textContent = ""
+                        errorMessage.classList.remove("active")
+                    }
+                    else {
+                        status.setCustomValidity("Please Enter Read Status")
+                        errorMessage.textContent = "Please Enter Read Status"
+                        errorMessage.classList.add("active")
+                    }
+                }
+                else {
+                    pages.setCustomValidity("Please Enter Number of Pages")
+                    errorMessage.textContent = "Please Enter Number of Pages"
+                    errorMessage.classList.add("active")
+                }
+            }
+            else {
+                title.setCustomValidity("Please Enter Title")
+                errorMessage.textContent = "Please Enter Title"
+                errorMessage.classList.add("active")
+            }
+        }
+        else {
+            author.setCustomValidity("Please Enter Author's Name")
+            errorMessage.textContent = "Please Enter Author's Name"
+            errorMessage.classList.add("active")
+        }
+
+    
 })
 
 displayLibrary();
